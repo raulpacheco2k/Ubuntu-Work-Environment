@@ -72,10 +72,10 @@
   rm google-chrome-stable_current_amd64.deb
   
   echo "Installing Anydesk..."
-  curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
+  curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg -y
   echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
   sudo apt update
-  sudo apt install anydesk
+  sudo apt install anydesk -y
 
   echo "Installing Docker..."
   sudo apt-get remove docker docker-engine docker.io containerd runc
