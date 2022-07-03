@@ -1,6 +1,7 @@
 #!/bin/bash
   
   apt_programs=(
+    gcc
     curl
     git
     snap
