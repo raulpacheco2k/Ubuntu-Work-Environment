@@ -1,24 +1,31 @@
-# Linux-Installation-Script
-Script to prepare the desktop on Linux.
+# Ubuntu Work Environment
+Script to prepare the work environment on Ubuntu.
 
 Rodar:
 
-`chmod u+x linux_programs.sh `
 
-`./linux_programs.sh`
+```bash
+git clone https://github.com/raulpacheco2k/Ubuntu-Work-Environment.git
+cd Ubuntu-Work-Environment
+chmod u+x configure_ubuntu_work_environment.sh
+./configure_ubuntu_work_environment.sh
+```
 
----
 
-[shellcheck](https://www.shellcheck.net/)
+Parse the shell with [shellcheck](https://www.shellcheck.net/)
 
-> A função update serve para ressincronizar os arquivos do índice de pacotes de suas fontes. As listas de pacotes disponíveis são obtidas nos locais especificados em /etc/apt/sources.list, por exemplo. 
+
+
+# Curiosities
+
+> The update function is used to resynchronize the package index files from the source.
 
 `sudo apt update`
 
-> A função upgrade irá tentar atualizar “delicadamente” todo o sistema. Nesse caso nunca será instalado, removido ou atualizado algum pacote que possa gerar alguma quebra no sistema. Esse comando pode ser usado frequentemente para atualizar o seu sistema com relativa segurança. 
+> The upgrade function tries to gently update the entire system. In this case, any packages that might break the system will not be installed, removed or updated.
 
 `sudo apt upgrade`
 
-> O comando dist-upgrade também atualiza os pacotes, porém, remove e instala pacotes se for necessário. Muitas vezes alguns softwares precisam ser instalados como dependências para certos aplicativos, essa opção faz isso. O dist-upgrade é uma atualização mais completa, porém, “mais arriscada”, já que modificará o sistema profundamente.
+> The dist-upgrade function is similar to the upgrade function, however, it removes and installs packages as needed. Usually when we install some software these in turn need their dependencies which are also installed, using dist-upgrade these dependencies will be removed if they are no longer needed.
 
 `sudo apt dist-upgrade`

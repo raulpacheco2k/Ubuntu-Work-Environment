@@ -41,7 +41,6 @@
 
   echo "Installing APT packages..."
   for apt_program in "${apt_programs[@]}"; do
-    echo "[Installing APT package: $apt_program]"
     sudo apt install "$apt_program" -y
   done
 
@@ -60,7 +59,6 @@
   sudo snap install webstorm --classic
   
   for snap_program in "${snap_programs[@]}"; do
-    echo "[Installing SNAP package: $snap_program]"
     sudo snap install "$snap_program"
   done
 
