@@ -1,6 +1,14 @@
 # Linux-Installation-Script
 Script to prepare the desktop on Linux.
 
+Rodar:
+
+`chmod u+x linux_programs.sh `
+
+`./linux_programs.sh`
+
+---
+
 [shellcheck](https://www.shellcheck.net/)
 
 > A função update serve para ressincronizar os arquivos do índice de pacotes de suas fontes. As listas de pacotes disponíveis são obtidas nos locais especificados em /etc/apt/sources.list, por exemplo. 
