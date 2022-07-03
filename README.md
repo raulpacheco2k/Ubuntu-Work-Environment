@@ -1,6 +1,8 @@
 # Linux-Installation-Script
 Script to prepare the desktop on Linux.
 
+[shellcheck](https://www.shellcheck.net/)
+
 > A função update serve para ressincronizar os arquivos do índice de pacotes de suas fontes. As listas de pacotes disponíveis são obtidas nos locais especificados em /etc/apt/sources.list, por exemplo. 
 
 `sudo apt update`
