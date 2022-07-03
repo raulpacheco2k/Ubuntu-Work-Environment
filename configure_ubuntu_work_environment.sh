@@ -94,11 +94,13 @@
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
   echo "Configuring Docker to work without sudo permission..."
-  sudo addgroup --system docker
-  sudo adduser $USER docker
-  newgrp docker
-  sudo snap disable docker
-  sudo snap enable docker
+  #sudo addgroup --system docker
+  #sudo adduser $USER docker
+  #newgrp docker
+  #sudo snap disable docker
+  #sudo snap enable docker
+  sudo groupadd docker
+  sudo usermod -aG docker $USER
   
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
