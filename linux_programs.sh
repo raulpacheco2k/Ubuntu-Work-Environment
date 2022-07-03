@@ -3,44 +3,37 @@
   apt_programs=(
     git
     snap
-    ca-certificates
-    curl
-    gnupg
-    lsb-release
-    docker-ce 
-    docker-ce-cli 
-    containerd.io 
-    docker-compose-plugin
   )
 
   snap_programs=(
-    "deckboard"
+    "anki-ppd"
+    "buka"
     "discord"
+    "fast"
+    "htop"
     "insomnia"
-    "libreoffice"
-    "ludo"
+    "mailspring"
+    "nordpass"
+    "notion-snap"
     "obs-studio"
     "postman"
-    "ppsspp-emu"
-    "telegram-desktop"
-    "termius-app"
-    "weka"
     "spotify"
-    "slack"
-    "slack-term"
-    "notion-snap"
-    "mailspring"
-    "telegram-cli"
-    "thunderbird"
-    "nordpass"
+    "termius-app"
+    "notes"
+    "notepadqq"
     "typora"
-    "xmind"
-    "anki-ppd"
     "vestin"
-    "htop"
-    "fast"
-    "buka"
-    "docker"
+    "weka"
+    "xmind"
+    #"deckboard"
+    #"libreoffice"
+    #"ludo"
+    #"ppsspp-emu"
+    #"slack-term"
+    #"slack"
+    #"telegram-cli"
+    #"telegram-desktop"
+    #"thunderbird"
   )
 
   echo "Updating repositories..."
@@ -62,10 +55,10 @@
   sudo snap install eclipse --classic
   sudo snap install intellij-idea-ultimate --classic
   sudo snap install netbeans --classic
+  sudo snap install phpstorm --classic
   sudo snap install pycharm-professional --classic
   sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
-  sudo snap install phpstorm --classic
   sudo snap install webstorm --classic
   
   for snap_program in "${snap_programs[@]}"; do
@@ -81,12 +74,17 @@
   dpkg -i ./google-chrome-stable_current_amd64.deb
   rm google-chrome-stable_current_amd64.deb
 
+  # Docker
+
   echo "Installing Docker and docker-compose..."
-  sudo apt-get remove docker docker-engine docker.io containerd runc -y
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-  echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get remove docker docker-engine docker.io containerd runc
+  sudo apt-get update
+  sudo apt-get install ca-certificates curl gnupg lsb-release
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
   echo "Configuring Docker to work without sudo permission..."
   sudo addgroup --system docker
