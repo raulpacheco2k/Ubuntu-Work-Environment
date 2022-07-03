@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
   
-  list_of_apt_programs=(
+  apt_programs=(
     git
+    snap
     ca-certificates
     curl
     gnupg
@@ -12,29 +13,17 @@
     docker-compose-plugin
   )
 
-  list_of_snap_programs=(
-    "android-studio --classic"
-    "clion --classic"
-    "code --classic"
-    "datagrip --classic"
+  snap_programs=(
     "deckboard"
     "discord"
-    "eclipse --classic"
     "insomnia"
-    "intellij-idea-ultimate --classic"
     "libreoffice"
     "ludo"
-    "netbeans --classic"
     "obs-studio"
-    "phpstorm --classic"
     "postman"
     "ppsspp-emu"
-    "pycharm-professional --classic"
-    "sublime-merge --classic"
-    "sublime-text --classic"
     "telegram-desktop"
     "termius-app"
-    "webstorm --classic"
     "weka"
     "spotify"
     "slack"
@@ -57,17 +46,31 @@
   echo "Updating repositories..."
   sudo apt update -y
 
+  # APT
   echo "Installing APT packages..."
-  for apt_program in ${list_of_apt_programs[@]}; do
-    echo "[Installing APT package: ] - $apt_program"
+  for apt_program in "${apt_programs[@]}"; do
+    echo "[Installing APT package: $apt_program]"
     sudo apt install "$apt_program" -y
   done
 
-  echo "Installing Snap packages..."
-  sudo apt install snapd -y
-  for snap_program in "${list_of_snap_programs[@]}"; do
-    echo "[Installing Snap package: ] - $snap_program"
-    sudo snap install $snap_program
+  # SNAP
+  echo "Installing SNAP packages..."
+  sudo snap install android-studio --classic
+  sudo snap install clion --classic
+  sudo snap install code --classic
+  sudo snap install datagrip --classic
+  sudo snap install eclipse --classic
+  sudo snap install intellij-idea-ultimate --classic
+  sudo snap install netbeans --classic
+  sudo snap install pycharm-professional --classic
+  sudo snap install sublime-merge --classic
+  sudo snap install sublime-text --classic
+  sudo snap install phpstorm --classic
+  sudo snap install webstorm --classic
+  
+  for snap_program in "${snap_programs[@]}"; do
+    echo "[Installing SNAP package: $snap_program]"
+    sudo snap install "$snap_program"
   done
 
   echo "Updating repositories..."
@@ -93,8 +96,9 @@
   sudo snap enable docker
   
   echo "Finalizing, updating and cleaning "
-  sudo apt update && sudo apt dist-upgrade -y
-  sudo apt autoclean
+  sudo apt update -y
+  sudo apt dist-upgrade -y
+  sudo apt autoclean -y
   sudo apt autoremove -y
 
   echo "Process finished, press enter..."
