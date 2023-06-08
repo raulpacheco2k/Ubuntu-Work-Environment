@@ -16,17 +16,18 @@
     "insomnia"
     "mailspring"
     "nordpass"
-    "notion-snap"
+    "notion-snap-reborn"
     "obs-studio"
     "postman"
     "spotify"
     "termius-app"
-    "notes"
-    "notepadqq"
     "typora"
     "vestin"
-    "weka"
     "xmind"
+    "docker"
+    "weka"
+    "notes"
+    "notepadqq"
     #"deckboard"
     #"libreoffice"
     #"ludo"
@@ -45,6 +46,8 @@
   for apt_program in "${apt_programs[@]}"; do
     sudo apt install "$apt_program" -y
   done
+  
+  snap refresh
 
   echo "Installing SNAP packages..."
   sudo snap install android-studio --classic
@@ -63,6 +66,8 @@
   for snap_program in "${snap_programs[@]}"; do
     sudo snap install "$snap_program"
   done
+  
+  snap connect nordpass:password-manager-service
 
   echo "Updating repositories..."
   sudo apt update -y
@@ -78,30 +83,12 @@
   sudo apt update
   sudo apt install anydesk -y
 
-  echo "Installing Docker..."
-  sudo apt-get remove docker docker-engine docker.io containerd runc
-  sudo apt-get update
-  sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release -y
-  sudo mkdir -p /etc/apt/keyrings
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-  echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt-get update
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-
   echo "Configuring Docker to work without sudo permission..."
-  #sudo addgroup --system docker
-  #sudo adduser $USER docker
-  #newgrp docker
-  #sudo snap disable docker
-  #sudo snap enable docker
-  sudo groupadd docker
-  sudo usermod -aG docker $USER
+  sudo addgroup --system docker
+  sudo adduser $USER docker
+  newgrp docker
+  sudo snap disable docker
+  sudo snap enable docker
   
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
