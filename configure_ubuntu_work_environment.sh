@@ -9,20 +9,21 @@
 
   snap_programs=(
     "anki-ppd"
-    "buka"
+    #"buka"
     #"deckboard"
     "discord"
     "docker"
     "fast"
     "htop"
     "insomnia"
-    #"libreoffice"
+    "libreoffice"
     #"ludo"
     "mailspring"
     "nordpass"
     #"notepadqq"
     #"notes"
     "notion-snap-reborn"
+    "notion-calendar-snap"
     "obs-studio"
     "postman"
     #"ppsspp-emu"
@@ -31,10 +32,10 @@
     "spotify"
     #"telegram-cli"
     #"telegram-desktop"
-    "termius-app"
-    "typora"
-    "vestin"
-    "weka"
+    #"termius-app"
+    #"typora"
+    #"vestin"
+    #"weka"
     "xmind"
   )
 
@@ -75,12 +76,6 @@
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   sudo dpkg -i ./google-chrome-stable_current_amd64.deb
   rm google-chrome-stable_current_amd64.deb
-  
-  echo "Installing Anydesk..."
-  curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg -y
-  echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
-  sudo apt update
-  sudo apt install anydesk -y
 
   echo "Configuring Docker to work without sudo permission..."
   sudo addgroup --system docker
