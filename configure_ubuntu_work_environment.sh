@@ -1,10 +1,8 @@
 #!/bin/bash
   
   apt_programs=(
-    gcc
-    curl
-    git
-    snap
+    #gcc
+    net-tools
   )
 
   snap_programs=(
