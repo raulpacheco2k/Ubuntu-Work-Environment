@@ -1,4 +1,6 @@
 #!/bin/bash
+
+  gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
   
   apt_programs=(
     #gcc
@@ -21,7 +23,7 @@
     #"notepadqq"
     #"notes"
     "notion-snap-reborn"
-    "notion-calendar-snap"
+    #"notion-calendar-snap"
     "obs-studio"
     "postman"
     #"ppsspp-emu"
