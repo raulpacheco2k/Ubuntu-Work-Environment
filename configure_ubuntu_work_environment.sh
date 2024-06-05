@@ -83,6 +83,8 @@
   newgrp docker
   sudo snap disable docker
   sudo snap enable docker
+
+  curl -fsSL https://ollama.com/install.sh | sh
   
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
