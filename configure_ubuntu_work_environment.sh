@@ -1,46 +1,52 @@
 #!/bin/bash
 
+  sudo add-apt-repository universe -y
+  sudo add-apt-repository ppa:agornostal/ulauncher -y
+
+  echo "Updating repositories..."
+  sudo apt update -y
+
   gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
+  gsettings set org.gnome.desktop.interface enable-animations false
   
   apt_programs=(
-    #gcc
     net-tools
+    ulauncher
+    tree
+    curl
   )
 
   snap_programs=(
     "anki-ppd"
-    #"buka"
-    #"deckboard"
+    "btop"
     "discord"
     "docker"
     "fast"
-    "htop"
-    "insomnia"
     "libreoffice"
-    #"ludo"
     "mailspring"
     "nordpass"
-    #"notepadqq"
-    #"notes"
     "notion-snap-reborn"
-    #"notion-calendar-snap"
     "obs-studio"
     "postman"
+    "spotify"
+    "xmind"
+    #"buka"
+    #"deckboard"
+    #"insomnia"
+    #"ludo"
+    #"notepadqq"
+    #"notes"
+    #"notion-calendar-snap"
     #"ppsspp-emu"
     #"slack-term"
     #"slack"
-    "spotify"
     #"telegram-cli"
     #"telegram-desktop"
     #"termius-app"
     #"typora"
     #"vestin"
     #"weka"
-    "xmind"
   )
-
-  echo "Updating repositories..."
-  sudo apt update -y
 
   echo "Installing APT packages..."
   for apt_program in "${apt_programs[@]}"; do
@@ -50,18 +56,11 @@
   snap refresh
 
   echo "Installing SNAP packages..."
-  sudo snap install android-studio --classic
-  sudo snap install clion --classic
   sudo snap install code --classic
-  sudo snap install datagrip --classic
   sudo snap install eclipse --classic
-  sudo snap install intellij-idea-ultimate --classic
   sudo snap install netbeans --classic
-  sudo snap install phpstorm --classic
-  sudo snap install pycharm-professional --classic
-  sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
-  sudo snap install webstorm --classic
+  sudo snap install sublime-merge --classic
   
   for snap_program in "${snap_programs[@]}"; do
     sudo snap install "$snap_program"
@@ -69,23 +68,30 @@
   
   snap connect nordpass:password-manager-service
 
-  echo "Updating repositories..."
-  sudo apt update -y
-
   echo "Installing Google Chrome..."
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   sudo dpkg -i ./google-chrome-stable_current_amd64.deb
   rm google-chrome-stable_current_amd64.deb
 
-  echo "Configuring Docker to work without sudo permission..."
-  sudo addgroup --system docker
-  sudo adduser $USER docker
-  newgrp docker
-  sudo snap disable docker
-  sudo snap enable docker
+  echo "Installing Jetbrains Toolbox..."
+  wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.tar.gz
 
+  #echo "Configuring Docker to work without sudo permission..."
+  #sudo addgroup --system docker
+  #sudo adduser $USER docker
+  #newgrp docker
+  #sudo snap disable docker
+  #sudo snap enable docker
+
+  echo "Installing AI..."
   curl -fsSL https://ollama.com/install.sh | sh
-  
+  ollama run llama3
+
+  echo "Configuring Git..."
+  git config --global credential.helper store
+  git config --global user.email eu@raulpacheco.com.br
+  git config --global user.name raulpacheco2k
+
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
   sudo apt dist-upgrade -y
