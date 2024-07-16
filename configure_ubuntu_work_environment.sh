@@ -6,15 +6,15 @@
   echo "Updating repositories..."
   sudo apt update -y
 
-  gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
   gsettings set org.gnome.desktop.interface enable-animations false
+  gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
   
   apt_programs=(
-    net-tools
-    ulauncher
-    tree
     curl
     neofetch
+    net-tools
+    tree
+    ulauncher
   )
 
   snap_programs=(
@@ -60,8 +60,9 @@
   sudo snap install code --classic
   sudo snap install eclipse --classic
   sudo snap install netbeans --classic
-  sudo snap install sublime-text --classic
+  sudo snap install obsidian --classic
   sudo snap install sublime-merge --classic
+  sudo snap install sublime-text --classic
   
   for snap_program in "${snap_programs[@]}"; do
     sudo snap install "$snap_program"
