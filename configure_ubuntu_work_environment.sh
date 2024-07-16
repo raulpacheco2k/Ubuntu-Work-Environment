@@ -14,6 +14,7 @@
     ulauncher
     tree
     curl
+    neofetch
   )
 
   snap_programs=(
