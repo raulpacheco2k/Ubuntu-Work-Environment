@@ -13,41 +13,56 @@
     curl
     neofetch
     net-tools
+    prelink
+    preload
     tree
     ulauncher
   )
 
   snap_programs=(
-    "anki-ppd"
-    "btop"
-    "discord"
+    # Development
     "docker"
-    "fast"
-    "libreoffice"
-    "nordpass"
-    "notion-snap-reborn"
-    "obs-studio"
     "postman"
-    "spotify"
+    "insomnia"
+    "termius-app"
+
+    # Utilities
+    "btop"
+    "nordpass"
+    "libreoffice"
     "thunderbird"
+    "fast"
+
+    # Studies
+    "anki-ppd"
+    "notion-snap-reborn"
     "xmind"
-    #"buka"
-    #"deckboard"
-    #"insomnia"
-    #"ludo"
-    #"notepadqq"
-    #"notes"
-    #"notion-calendar-snap"
-    #"ppsspp-emu"
-    #"slack-term"
-    #"slack"
-    #"telegram-cli"
-    #"telegram-desktop"
-    #"termius-app"
-    #"typora"
-    #"vestin"
-    #"weka"
-  )
+    # "kbruch"
+    # "buka"
+    # "weka"
+    # "graphs"
+    # "dataexplore"
+    # "labplot"
+
+    # Communication
+    "discord"
+
+    # Games
+    # "ludo"
+    # "ppsspp-emu"
+
+    # Others
+    "obs-studio"
+    "spotify"
+
+    # Finances
+    # "vestin"
+    # "skrooge"
+    # "simplebudget"
+    # "mmex"
+    # "eqonomize-hk"
+    # "retirement-scenarios"
+    )
 
   echo "Installing APT packages..."
   for apt_program in "${apt_programs[@]}"; do
@@ -57,11 +72,12 @@
   snap refresh
 
   echo "Installing SNAP packages..."
+  sudo snap install aws-cli --classic
   sudo snap install code --classic
-  sudo snap install eclipse --classic
-  sudo snap install netbeans --classic
+  #sudo snap install eclipse --classic
+  #sudo snap install netbeans --classic
   sudo snap install obsidian --classic
-  sudo snap install sublime-merge --classic
+  #sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
   
   for snap_program in "${snap_programs[@]}"; do
