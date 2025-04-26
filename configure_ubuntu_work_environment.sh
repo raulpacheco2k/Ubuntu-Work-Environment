@@ -15,8 +15,10 @@
     net-tools
     prelink
     preload
+    bleachbit
     tree
     ulauncher
+    unison
   )
 
   snap_programs=(
@@ -37,31 +39,14 @@
     "anki-ppd"
     "notion-snap-reborn"
     "xmind"
-    # "kbruch"
-    # "buka"
-    # "weka"
-    # "graphs"
-    # "dataexplore"
-    # "labplot"
 
     # Communication
     "discord"
 
-    # Games
-    # "ludo"
-    # "ppsspp-emu"
-
     # Others
     "obs-studio"
     "spotify"
-
-    # Finances
-    # "vestin"
-    # "skrooge"
-    # "simplebudget"
-    # "mmex"
-    # "eqonomize-hk"
-    # "retirement-scenarios"
+    "gedit"
     )
 
   echo "Installing APT packages..."
@@ -69,17 +54,49 @@
     sudo apt install "$apt_program" -y
   done
   
-  snap refresh
-
   echo "Installing SNAP packages..."
-  sudo snap install aws-cli --classic
+  sudo snap install phpstorm --classic
+  sudo snap install pycharm-professional --classic
+  sudo snap install intellij-idea-ultimate --classic
+  sudo snap install webstorm --classic
+  sudo snap install clion --classic
+  sudo snap install rubymine --classic
+  sudo snap install goland --classic
+  sudo snap install datagrip --classic
+  sudo snap install dataspell --classic
+  sudo snap install space
   sudo snap install code --classic
-  #sudo snap install eclipse --classic
-  #sudo snap install netbeans --classic
-  sudo snap install obsidian --classic
-  #sudo snap install sublime-merge --classic
+  sudo snap install eclipse --classic
+  sudo snap install netbeans --classic
+  sudo snap install aws-cli --classic 
+  sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
+  sudo snap install obsidian --classic
+
+  # Snap to test
+  # sudo snap install beekeeper-studio
+  # sudo snap install node --classic --channel=22
+
+  # Finances
+  # "vestin"
+  # "skrooge"
+  # "simplebudget"
+  # "mmex"
+  # "eqonomize-hk"
+  # "retirement-scenarios"
+
+  # Studies
+  # "kbruch"
+  # "buka"
+  # "weka"
+  # "graphs"
+  # "dataexplore"
+  # "labplot"
   
+  # Games
+  # "ludo"
+  # "ppsspp-emu"
+
   for snap_program in "${snap_programs[@]}"; do
     sudo snap install "$snap_program"
   done
@@ -91,19 +108,9 @@
   sudo dpkg -i ./google-chrome-stable_current_amd64.deb
   rm google-chrome-stable_current_amd64.deb
 
-  echo "Installing Jetbrains Toolbox..."
-  wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.tar.gz
-
-  #echo "Configuring Docker to work without sudo permission..."
-  #sudo addgroup --system docker
-  #sudo adduser $USER docker
-  #newgrp docker
-  #sudo snap disable docker
-  #sudo snap enable docker
-
   echo "Installing AI..."
   curl -fsSL https://ollama.com/install.sh | sh
-  ollama run llama3
+  ollama run gemma3:1b
 
   echo "Configuring Git..."
   git config --global credential.helper store
@@ -112,12 +119,18 @@
 
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
+  sudo apt upgrade -y
   sudo apt dist-upgrade -y
-  sudo apt autoclean -y
   sudo apt autoremove -y
+  sudo apt clean
+  sudo apt autoclean
+  sudo apt --fix-broken install
+  sudo snap refresh
+  sudo bleachbit --clean system.cache system.trash system.tmp
+  sudo fstrim -av
 
   echo "Process finished, press enter..."
-  read enter
+  read -r enter
 
   read -p "Do you want to restart your computer now? [Y/N]: " option
   if [ "$option" == "y" ] || [ "$option" == "Y" ]; then
