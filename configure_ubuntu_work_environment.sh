@@ -47,12 +47,13 @@
     "obs-studio"
     "spotify"
     "gedit"
-    )
+  )
 
   echo "Installing APT packages..."
-  for apt_program in "${apt_programs[@]}"; do
-    sudo apt install "$apt_program" -y
-  done
+  sudo apt install -y "${apt_programs[@]}"
+
+  echo "Installing SNAP packages..."
+  sudo snap install "${snap_programs[@]}"
   
   echo "Installing SNAP packages..."
   sudo snap install phpstorm --classic
@@ -72,34 +73,6 @@
   sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
   sudo snap install obsidian --classic
-
-  # Snap to test
-  # sudo snap install beekeeper-studio
-  # sudo snap install node --classic --channel=22
-
-  # Finances
-  # "vestin"
-  # "skrooge"
-  # "simplebudget"
-  # "mmex"
-  # "eqonomize-hk"
-  # "retirement-scenarios"
-
-  # Studies
-  # "kbruch"
-  # "buka"
-  # "weka"
-  # "graphs"
-  # "dataexplore"
-  # "labplot"
-  
-  # Games
-  # "ludo"
-  # "ppsspp-emu"
-
-  for snap_program in "${snap_programs[@]}"; do
-    sudo snap install "$snap_program"
-  done
   
   snap connect nordpass:password-manager-service
 
