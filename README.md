@@ -1,5 +1,5 @@
 # Ubuntu Work Environment
-Script para configurar o ambiente de trabalho no Ubuntu; testado na última vez na versão 24.04 LTS.
+Script para configurar o ambiente de trabalho no Ubuntu; testado na última vez na versão 25.04 em 27/04/2025.
 
 ```bash
 git clone https://github.com/raulpacheco2k/Ubuntu-Work-Environment.git
