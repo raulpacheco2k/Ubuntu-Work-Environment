@@ -92,15 +92,18 @@
 
   echo "Finalizing, updating and cleaning "
   sudo apt update -y
-  sudo apt upgrade -y
-  sudo apt dist-upgrade -y
-  sudo apt autoremove -y
-  sudo apt clean
-  sudo apt autoclean
   sudo apt --fix-broken install
+  sudo apt upgrade -y
+  sudo apt full-upgrade -y
+  sudo apt dist-upgrade -y
+  sudo apt autoremove --purge -y
+  sudo apt autoclean
+  sudo apt clean
   sudo snap refresh
+  sudo journalctl --vacuum-size=100M
   sudo bleachbit --clean system.cache system.trash system.tmp
   sudo fstrim -av
+  sudo updatedb
 
   echo "Process finished, press enter..."
   read -r enter
