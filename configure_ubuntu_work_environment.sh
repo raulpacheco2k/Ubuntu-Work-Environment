@@ -1,12 +1,9 @@
 #!/bin/bash
 
-  sudo add-apt-repository universe -y
-  sudo add-apt-repository ppa:agornostal/ulauncher -y
-
   echo "Updating repositories..."
   sudo apt update -y
 
-  gsettings set org.gnome.desktop.interface enable-animations false
+  gsettings set org.gnome.desktop.interface enable-animations true
   gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
   
   apt_programs=(
@@ -17,7 +14,6 @@
     preload
     bleachbit
     tree
-    ulauncher
     unison
   )
 
@@ -36,7 +32,7 @@
     "fast"
 
     # Studies
-    "anki-ppd"
+    "anki-desktop"
     "notion-snap-reborn"
     "xmind"
 
@@ -50,10 +46,14 @@
   )
 
   echo "Installing APT packages..."
-  sudo apt install -y "${apt_programs[@]}"
+  for apt_program in "${apt_programs[@]}"; do
+    sudo apt install "$apt_program" -y
+  done
 
   echo "Installing SNAP packages..."
-  sudo snap install "${snap_programs[@]}"
+  for snap_program in "${snap_programs[@]}"; do
+    sudo snap install "$snap_program"
+  done
   
   echo "Installing SNAP packages..."
   sudo snap install phpstorm --classic
