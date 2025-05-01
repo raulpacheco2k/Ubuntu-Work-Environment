@@ -114,7 +114,6 @@
   sudo journalctl --vacuum-size=100M
   sudo bleachbit --clean system.cache system.trash system.tmp
   sudo fstrim -av
-  sudo updatedb
 
   read -p "Setup completed. Do you want to restart your computer now? [Y/N]: " option
   if [ "$option" == "y" ] || [ "$option" == "Y" ]; then
