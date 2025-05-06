@@ -1,5 +1,8 @@
 #!/bin/bash
 
+  exec > >(tee -i environment_configuration_log.txt)
+  exec 2>&1
+
   echo "Updating repositories..."
   sudo apt update -y
 
