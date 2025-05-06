@@ -100,6 +100,12 @@
   sudo snap install sublime-text --classic
   sudo snap install obsidian --classic
 
+  echo "Installing Electrum..."
+  sudo apt-get install python3-pyqt5 libsecp256k1-dev python3-cryptography libzbar0 wget
+  wget https://download.electrum.org/4.5.8/Electrum-4.5.8.tar.gz
+  sudo apt-get install python3-setuptools python3-pip
+  python3 -m pip install --break-system-packages --user Electrum-4.5.8.tar.gz
+
   echo "Installing AI..."
   curl -fsSL https://ollama.com/install.sh | sh
   ollama run gemma3:1b
