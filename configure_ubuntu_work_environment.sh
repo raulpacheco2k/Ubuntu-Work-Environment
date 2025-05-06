@@ -30,6 +30,7 @@
   rm google-chrome-stable_current_amd64.deb
 
   apt_programs=(
+    p7zip-full
     curl
     neofetch
     net-tools
@@ -78,8 +79,6 @@
     sudo snap install "$snap_program"
   done
 
-  snap connect nordpass:password-manager-service
-
   sudo snap install phpstorm --classic
   sudo snap install pycharm-professional --classic
   sudo snap install intellij-idea-ultimate --classic
@@ -99,6 +98,14 @@
   sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
   sudo snap install obsidian --classic
+
+  echo "Configuring NordPass..."
+  snap connect nordpass:password-manager-service
+
+  echo "Configuring Docker to work without sudo permission..."
+  sudo addgroup --system docker
+  sudo adduser $USER docker
+  newgrp docker
 
   echo "Installing Electrum..."
   sudo apt-get install python3-pyqt5 libsecp256k1-dev python3-cryptography libzbar0 wget
