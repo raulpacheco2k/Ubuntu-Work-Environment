@@ -16,6 +16,7 @@
   ssh-add ~/.ssh/id_ed25519
 
   echo "Configuring Git..."
+  git config --global core.editor "nano"
   git config --global credential.helper store
   git config --global user.email eu@raulpacheco.com.br
   git config --global user.name raulpacheco2k
