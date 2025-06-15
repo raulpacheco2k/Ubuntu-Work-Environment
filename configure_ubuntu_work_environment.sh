@@ -4,7 +4,7 @@
   exec 2>&1
 
   echo "Updating repositories..."
-  sudo apt update -y
+  sudo apt-get update -y
 
   echo "Customizing Ubuntu..."
   gsettings set org.gnome.desktop.interface enable-animations true
@@ -14,6 +14,8 @@
   ssh-keygen -t ed25519 -C "eu@raulpacheco.com.br"
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_ed25519
+  chmod 600 ~/.ssh/id_ed25519
+  chmod 644 ~/.ssh/id_ed25519.pub
 
   echo "Configuring Git..."
   git config --global core.editor "nano"
@@ -67,12 +69,11 @@
     # Others
     "obs-studio"
     "spotify"
-    "gedit"
   )
 
   echo "Installing APT packages..."
   for apt_program in "${apt_programs[@]}"; do
-    sudo apt install "$apt_program" -y
+    sudo apt-get install "$apt_program" -y
   done
 
   echo "Installing SNAP packages..."
@@ -106,27 +107,30 @@
   echo "Configuring Docker to work without sudo permission..."
   sudo addgroup --system docker
   sudo adduser $USER docker
-  newgrp docker
 
   echo "Installing Electrum..."
   sudo apt-get install python3-pyqt5 libsecp256k1-dev python3-cryptography libzbar0 wget
   wget https://download.electrum.org/4.5.8/Electrum-4.5.8.tar.gz
   sudo apt-get install python3-setuptools python3-pip
   python3 -m pip install --break-system-packages --user Electrum-4.5.8.tar.gz
+  rm Electrum-4.5.8.tar.gz
 
   echo "Installing AI..."
   curl -fsSL https://ollama.com/install.sh | sh
-  ollama run gemma3:1b
+  until curl -s http://localhost:11434 > /dev/null; do
+   sleep 1
+  done
+  ollama pull deepseek-r1:latest
 
   echo "Finalizing, updating and cleaning "
-  sudo apt update -y
-  sudo apt --fix-broken install
-  sudo apt upgrade -y
-  sudo apt full-upgrade -y
-  sudo apt dist-upgrade -y
-  sudo apt autoremove --purge -y
-  sudo apt autoclean
-  sudo apt clean
+  sudo apt-get update -y
+  sudo apt-get --fix-broken install
+  sudo apt-get upgrade -y
+  sudo apt-get full-upgrade -y
+  sudo apt-get dist-upgrade -y
+  sudo apt-get autoremove --purge -y
+  sudo apt-get autoclean
+  sudo apt-get clean
   sudo snap refresh
   sudo journalctl --vacuum-size=100M
   sudo bleachbit --clean system.cache system.trash system.tmp
