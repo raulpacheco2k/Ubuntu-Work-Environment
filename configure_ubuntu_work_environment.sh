@@ -33,13 +33,14 @@
   rm google-chrome-stable_current_amd64.deb
 
   apt_programs=(
-    p7zip-full
+    bleachbit
     curl
+    git
     neofetch
     net-tools
+    p7zip-full
     prelink
     preload
-    bleachbit
     tree
     unison
   )
