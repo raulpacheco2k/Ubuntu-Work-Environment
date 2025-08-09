@@ -111,17 +111,17 @@
 
   echo "Installing Electrum..."
   sudo apt-get install python3-pyqt5 libsecp256k1-dev python3-cryptography libzbar0 wget
-  wget https://download.electrum.org/4.5.8/Electrum-4.5.8.tar.gz
+  wget https://download.electrum.org/4.6.1/Electrum-4.6.1.tar.gz
   sudo apt-get install python3-setuptools python3-pip
-  python3 -m pip install --break-system-packages --user Electrum-4.5.8.tar.gz
-  rm Electrum-4.5.8.tar.gz
+  python3 -m pip install --break-system-packages --user Electrum-4.6.1.tar.gz
+  rm Electrum-4.6.1.tar.gz
 
   echo "Installing AI..."
   curl -fsSL https://ollama.com/install.sh | sh
   until curl -s http://localhost:11434 > /dev/null; do
    sleep 1
   done
-  ollama pull deepseek-r1:latest
+  #ollama pull deepseek-r1:latest
 
   echo "Finalizing, updating and cleaning "
   sudo apt-get update -y
