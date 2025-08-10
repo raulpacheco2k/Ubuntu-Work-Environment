@@ -123,6 +123,12 @@
   done
   #ollama pull deepseek-r1:latest
 
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+  \. "$HOME/.nvm/nvm.sh"
+  nvm install 24
+  npm install -g @google/gemini-cli
+  npm install -g @anthropic-ai/claude-code
+
   echo "Finalizing, updating and cleaning "
   sudo apt-get update -y
   sudo apt-get --fix-broken install
