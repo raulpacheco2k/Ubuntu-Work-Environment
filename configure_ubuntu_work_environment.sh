@@ -3,6 +3,10 @@
   exec > >(tee -i environment_configuration_log.txt)
   exec 2>&1
 
+  read -p "Informe seu e-mail: " EMAIL
+  read -p "Informe seu username: " USERNAME
+  read -p "Informe sua senha: " PASSWORD
+
   echo "Updating repositories..."
   sudo apt-get update -y
 
@@ -11,7 +15,7 @@
   gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
 
   echo "Generating SSH keys..."
-  ssh-keygen -t ed25519 -C "eu@raulpacheco.com.br"
+  ssh-keygen -t ed25519 -C "$EMAIL" -N "$PASSWORD"
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_ed25519
   chmod 600 ~/.ssh/id_ed25519
@@ -20,8 +24,8 @@
   echo "Configuring Git..."
   git config --global core.editor "nano"
   git config --global credential.helper store
-  git config --global user.email eu@raulpacheco.com.br
-  git config --global user.name raulpacheco2k
+  git config --global user.email "$EMAIL"
+  git config --global user.name "$USERNAME"
   git config --global gpg.format ssh
   git config --global user.signingKey "$(cat ~/.ssh/id_ed25519.pub)"
   git config --global commit.gpgsign true
