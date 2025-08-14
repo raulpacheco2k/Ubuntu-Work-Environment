@@ -7,9 +7,6 @@
   read -p "Informe seu username: " USERNAME
   read -p "Informe sua senha: " PASSWORD
 
-  echo "Updating repositories..."
-  sudo apt-get update -y
-
   echo "Customizing Ubuntu..."
   gsettings set org.gnome.desktop.interface enable-animations true
   gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
@@ -22,6 +19,7 @@
   chmod 644 ~/.ssh/id_ed25519.pub
 
   echo "Configuring Git..."
+  sudo apt install git
   git config --global core.editor "nano"
   git config --global credential.helper store
   git config --global user.email "$EMAIL"
