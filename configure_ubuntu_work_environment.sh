@@ -7,10 +7,6 @@
   read -p "Informe seu username: " USERNAME
   read -p "Informe sua senha: " PASSWORD
 
-  echo "Customizing Ubuntu..."
-  gsettings set org.gnome.desktop.interface enable-animations true
-  gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
-
   echo "Generating SSH keys..."
   ssh-keygen -t ed25519 -C "$EMAIL" -N "$PASSWORD"
   eval "$(ssh-agent -s)"
@@ -19,7 +15,7 @@
   chmod 644 ~/.ssh/id_ed25519.pub
 
   echo "Configuring Git..."
-  sudo apt install git
+  sudo apt-get install git
   git config --global core.editor "nano"
   git config --global credential.helper store
   git config --global user.email "$EMAIL"
@@ -43,8 +39,12 @@
     p7zip-full
     prelink
     preload
+    software-properties-common
     tree
+    ubuntu-drivers-common
     unison
+    vim
+    wget
   )
 
   snap_programs=(
@@ -99,7 +99,7 @@
   sudo snap install code --classic
   sudo snap install eclipse --classic
   sudo snap install netbeans --classic
-  sudo snap install aws-cli --classic 
+  sudo snap install aws-cli --classic
   sudo snap install sublime-merge --classic
   sudo snap install sublime-text --classic
   sudo snap install obsidian --classic
@@ -111,25 +111,41 @@
   sudo addgroup --system docker
   sudo adduser $USER docker
 
-  echo "Installing Electrum..."
+  # Instalação da Electrum
   sudo apt-get install python3-pyqt5 libsecp256k1-dev python3-cryptography libzbar0 wget
-  wget https://download.electrum.org/4.6.1/Electrum-4.6.1.tar.gz
+  wget https://download.electrum.org/4.6.2/Electrum-4.6.2.tar.gz
   sudo apt-get install python3-setuptools python3-pip
-  python3 -m pip install --break-system-packages --user Electrum-4.6.1.tar.gz
-  rm Electrum-4.6.1.tar.gz
+  python3 -m pip install --break-system-packages --user Electrum-4.6.2.tar.gz
+  rm Electrum-4.6.2.tar.gz
 
-  echo "Installing AI..."
+  # Instalando Ollama
   curl -fsSL https://ollama.com/install.sh | sh
   until curl -s http://localhost:11434 > /dev/null; do
    sleep 1
   done
   #ollama pull deepseek-r1:latest
 
+  # Instalando IA Agents
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
   \. "$HOME/.nvm/nvm.sh"
   nvm install 24
   npm install -g @google/gemini-cli
   npm install -g @anthropic-ai/claude-code
+
+  # Configurações da placa de vídeo NVidia
+  sudo add-apt-repository universe
+  sudo apt-get update
+  sudo ubuntu-drivers install
+  sudo apt-get install -y nvidia-driver-580-open
+  sudo apt-get install -y vulkan-tools 
+  sudo apt-get install -y mesa-vulkan-drivers 
+  sudo apt-get install -y nvidia-cuda-toolkit
+  sudo apt-get install -y mesa-utils
+  sudo prime-select nvidia
+
+  # Customizando o Ubuntu
+  gsettings set org.gnome.desktop.interface enable-animations true
+  gsettings set org.gnome.nautilus.preferences default-sort-order 'type'
 
   echo "Finalizing, updating and cleaning "
   sudo apt-get update -y
@@ -144,10 +160,4 @@
   sudo journalctl --vacuum-size=100M
   sudo bleachbit --clean system.cache system.trash system.tmp
   sudo fstrim -av
-
-  read -p "Setup completed. Do you want to restart your computer now? [Y/N]: " option
-  if [ "$option" == "y" ] || [ "$option" == "Y" ]; then
-    sudo reboot
-  fi
-
-  exit 0
+  sudo reboot
