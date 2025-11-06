@@ -40,6 +40,7 @@
   sudo apt-get install -y bleachbit
   sudo apt-get install -y curl
   sudo apt-get install -y fastfetch
+  sudo apt-get install -y lazygit
   sudo apt-get install -y gnome-snapshot
   sudo apt-get install -y net-tools
   sudo apt-get install -y nvtop
@@ -100,38 +101,48 @@
   snap install termius-app   
   snap install webstorm --classic
 
+  # Instalando pacotes NPM
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+  \. "$HOME/.nvm/nvm.sh"
+  nvm install 24
+  npm install -g @google/gemini-cli
+  npm install -g @anthropic-ai/claude-code
+  npm install -g @github/copilot
+  npm install -g @openai/codex
+
+  # Lazydocker
+  curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
   # Definindo a placa de vídeo Nvidia como principal
   sudo prime-select nvidia
+
+  # Configurando ajuste de brilho em hardware Nvidia
+  GRUB_FILE="/etc/default/grub"
+  KERNEL_PARAM="acpi_backlight=native"
+  sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/\(\"[^\"]*\)\"/\1 ${KERNEL_PARAM}\"/" "${GRUB_FILE}"
+  update-grub
 
   # Configurando Docker para funcionar sem permissão sudo
   sudo addgroup --system docker
   sudo adduser $USER docker
 
-  # Instalando Google Chrome.
-  #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #sudo dpkg -i ./google-chrome-stable_current_amd64.deb
-  #rm google-chrome-stable_current_amd64.deb
+  # Instalando Google Chrome
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo dpkg -i ./google-chrome-stable_current_amd64.deb
+  rm google-chrome-stable_current_amd64.deb
 
   # Instalando Electrum
-  #sudo apt-get install python3-pyqt6 libsecp256k1-dev python3-cryptography
-  #wget https://download.electrum.org/4.6.2/Electrum-4.6.2.tar.gz
-  #sudo apt-get install python3-setuptools python3-pip
-  #python3 -m pip install --break-system-packages --user Electrum-4.6.2.tar.gz
-  #rm Electrum-4.6.2.tar.gz
+  sudo apt-get install python3-pyqt6 libsecp256k1-dev python3-cryptography
+  wget https://download.electrum.org/4.6.2/Electrum-4.6.2.tar.gz
+  sudo apt-get install python3-setuptools python3-pip
+  python3 -m pip install --break-system-packages --user Electrum-4.6.2.tar.gz
+  rm Electrum-4.6.2.tar.gz
 
   # Instalando Ollama
-  #curl -fsSL https://ollama.com/install.sh | sh
-  #until curl -s http://localhost:11434 > /dev/null; do
-  #  sleep 1
-  #done
-  #ollama pull deepseek-r1:latest
-
-  # Instalando IA Agents
-  #curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
-  #\. "$HOME/.nvm/nvm.sh"
-  #nvm install 24
-  #npm install -g @google/gemini-cli
-  #npm install -g @anthropic-ai/claude-code
+  curl -fsSL https://ollama.com/install.sh | sh
+  ollama pull gpt-oss:120b-cloud
+  ollama pull qwen3-coder:480b-cloud
+  ollama pull minimax-m2:cloud
 
   # Limpeza do sistema 
   sudo apt-get autoremove --purge -y
@@ -140,4 +151,10 @@
   sudo journalctl --vacuum-size=1G
   sudo bleachbit --clean system.cache system.trash system.tmp
   sudo fstrim -av
-  sudo reboot
+
+  read -p "Configuração concluída. Deseja reiniciar o computador agora? [S/N]: " option
+  if [ "$option" == "S" ] || [ "$option" == "s" ]; then
+    sudo reboot
+  fi
+
+  exit 0
