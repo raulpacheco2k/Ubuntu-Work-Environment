@@ -57,49 +57,79 @@
   sudo apt-get install -y vulkan-tools mesa-utils nvidia-cuda-toolkit
 
   # Instalando pacotes SNAP
-  ## Segurança
-  snap install nordpass
+  ## Gerenciamento de senha
+  sudo snap install keepassxc
+  sudo snap install 1password
+  sudo snap install authenticator --edge
+  sudo snap install 2fa
+  sudo snap install nordpass
   snap connect nordpass:password-manager-service
+  ## Rede
+  sudo snap install nordvpn
+  sudo snap install ngrok
   ## Estudos e notas
-  snap install anki-desktop
-  snap install notion-snap-reborn
-  snap install obsidian --classic
-  snap install xmind
+  sudo snap install anki-desktop
+  sudo snap install notion-snap-reborn
+  sudo snap install obsidian --classic
+  sudo snap install xmind
+  sudo snap install kbruch
   ## Comunicação
-  snap install discord
+  sudo snap install discord
   ## Utilitários
-  snap install btop
-  snap install fast
-  snap install firefox
-  snap install libreoffice
-  snap install spotify
-  snap install thunderbird
+  sudo snap install btop
+  sudo snap install fast
+  sudo snap install firefox
+  sudo snap install libreoffice
+  sudo snap install spotify
+  sudo snap install thunderbird
+  sudo snap install wethr
+  sudo snap install teleprompter
+  sudo snap install vlc
+  sudo snap install gimp
+  sudo snap install blender --classic
+  sudo snap install audacity
+  sudo snap install foobar2000
+  sudo snap install gnome-boxes
   ## Jogos e lives
-  snap install obs-studio
-  snap install steam
+  sudo snap install obs-studio
+  sudo snap install steam
   ## Desenvolvimento
-  snap install aws-cli --classic
-  snap install clion --classic
-  snap install code --classic
-  snap install datagrip --classic
-  snap install dataspell --classic
-  snap install docker
-  snap install eclipse --classic
-  snap install goland --classic
-  snap install insomnia
-  snap install intellij-idea-ultimate --classic
-  snap install netbeans --classic
-  snap install phpstorm --classic
-  snap install postman
-  snap install pycharm-professional --classic
-  snap install rider --classic
-  snap install rubymine --classic
-  snap install rustrover --classic
-  snap install space
-  snap install sublime-merge --classic
-  snap install sublime-text --classic
-  snap install termius-app   
-  snap install webstorm --classic
+  ### Essenciais
+  sudo snap install code --classic
+  sudo snap install docker
+  sudo snap install sublime-text --classic
+  ### Complementares
+  sudo snap install aws-cli --classic
+  sudo snap install beekeeper-studio
+  sudo snap install dbeaver-ce
+  sudo snap install drawio
+  sudo snap install eclipse --classic
+  sudo snap install fx
+  sudo snap install heidisql-wine
+  sudo snap install insomnia
+  sudo snap install mysql-workbench-community
+  sudo snap install netbeans --classic
+  sudo snap install notepad-plus-plus
+  sudo snap install onefetch
+  sudo snap install postman
+  sudo snap install sublime-merge --classic
+  sudo snap install termius-app   
+  sudo snap install waveterm --classic
+  sudo snap install weka
+  ### JetBrains
+  sudo snap install android-studio --classic
+  sudo snap install clion --classic
+  sudo snap install datagrip --classic
+  sudo snap install dataspell --classic
+  sudo snap install goland --classic
+  sudo snap install intellij-idea-ultimate --classic
+  sudo snap install phpstorm --classic
+  sudo snap install pycharm-professional --classic
+  sudo snap install rider --classic
+  sudo snap install rubymine --classic
+  sudo snap install rustrover --classic
+  sudo snap install space
+  sudo snap install webstorm --classic
 
   # Instalando pacotes NPM
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
@@ -151,6 +181,9 @@
   sudo journalctl --vacuum-size=1G
   sudo bleachbit --clean system.cache system.trash system.tmp
   sudo fstrim -av
+
+  clear
+  fastfetch
 
   read -p "Configuração concluída. Deseja reiniciar o computador agora? [S/N]: " option
   if [ "$option" == "S" ] || [ "$option" == "s" ]; then
