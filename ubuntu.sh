@@ -8,6 +8,14 @@ exec 2>&1
 read -p "Informe seu e-mail: " EMAIL
 read -p "Informe seu username: " USERNAME
 
+# Arquivos de configurações
+## Arquivo original da instação do Ubutu em /etc/skel/.bashrc
+## Estudar a possibilidade de link simbolico p.ex.: ln -sf $PWD/.bashrc ~/.bashrc
+cp .bashrc ~/.bashrc
+cp .gitconfig ~/.gitconfig
+mkdir -p ~/.config/i3 && cp .config/i3/config ~/.config/i3/config
+mkdir -p ~/.unison && cp .unison/sync.prf ~/.unison/sync.prf
+
 # Configurando SSH
 ssh-keygen -t ed25519 -C "$EMAIL"
 eval "$(ssh-agent -s)"
@@ -55,6 +63,15 @@ sudo apt-get install -y vim
 sudo apt-get install -y wget
 sudo apt-get install -y $(ubuntu-drivers devices | grep recommended | awk '{print $3}')
 sudo apt-get install -y vulkan-tools mesa-utils nvidia-cuda-toolkit
+sudo apt-get install -y i3
+sudo apt-get install -y xserver-xorg-input-all
+sudo apt-get install -y xinput
+sudo apt-get install -y pulseaudio-utils
+sudo apt-get install -y alacritty
+sudo apt-get install -y kitty
+
+# Ulauncher
+sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y && sudo apt update && sudo apt install ulauncher
 
 # Instalando pacotes SNAP
 ## Gerenciamento de senha

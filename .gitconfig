@@ -1,0 +1,30 @@
+[core]
+    editor = nano
+    filemode = false
+[credential]
+    helper = store
+[alias]
+    s = status -s
+    c = commit
+    cc = checkout
+    cb = checkout -b
+    cl = clean
+    l = log --graph --decorate --oneline
+    amend = commit --amend --reuse-message=HEAD
+    contributors = shortlog --summary --numbered
+    branches = branch -a
+[color "branch"]
+    current = yellow reverse
+    local = cyan
+    remote = green
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+[color "diff"]
+    old = red reverse
+    new = green reverse
+[help]
+    autocorrect = 1
+[init]
+    defaultBranch = main

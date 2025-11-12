@@ -1,0 +1,33 @@
+# Define diretórios root que serão usados como origem para sincronização.
+root = /home/raulpacheco2k
+root = /mnt/Kingston/raulpacheco2k
+
+# Lista subpastas específicas que devem ser sincronizadas dentro dos diretórios root.
+path = Documentos
+path = Downloads
+path = Imagens
+path = Projetos
+path = Vídeos
+path = Músicas
+path = .bash_history
+
+# Define padrões de arquivos e diretórios que devem ser ignorados durante a sincronização.
+ignore = Name {*.log}
+ignore = Name {*.temp}
+ignore = Name {*.tmp}
+ignore = Name {*/__pycache__}
+ignore = Name {*/.idea}
+ignore = Name {*/.venv}
+ignore = Name {*/.vscode}
+ignore = Name {*/node_modules}
+ignore = Name {*/vendor}
+ignore = Name {*/venv}
+ignore = Name {composer.lock}
+ignore = Name {package-lock.json}
+
+# Ativa a execução automática e em modo batch, sem pedir confirmação para cada ação.
+auto = true
+batch = true
+
+# Impede a necessidade de confirmação para exclusão em massa de arquivos.
+confirmbigdel = false
