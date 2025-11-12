@@ -36,6 +36,7 @@ git config --global tag.gpgsign true
 
 # Atualizando o sistema
 sudo add-apt-repository universe -y
+sudo add-apt-repository ppa:agornostal/ulauncher -y
 sudo apt-get update -y
 sudo apt-get --fix-broken install
 sudo apt-get upgrade -y
@@ -59,19 +60,20 @@ sudo apt-get install -y software-properties-common
 sudo apt-get install -y tree
 sudo apt-get install -y ubuntu-drivers-common
 sudo apt-get install -y unison
+sudo apt-get install -y unison-gtk
 sudo apt-get install -y vim
 sudo apt-get install -y wget
 sudo apt-get install -y $(ubuntu-drivers devices | grep recommended | awk '{print $3}')
 sudo apt-get install -y vulkan-tools mesa-utils nvidia-cuda-toolkit
+# Pacotes para i3wm
 sudo apt-get install -y i3
 sudo apt-get install -y xserver-xorg-input-all
 sudo apt-get install -y xinput
 sudo apt-get install -y pulseaudio-utils
 sudo apt-get install -y alacritty
 sudo apt-get install -y kitty
-
-# Ulauncher
-sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y && sudo apt update && sudo apt install ulauncher
+sudo apt-get install -y ulauncher
+sudo apt-get install -y feh
 
 # Instalando pacotes SNAP
 ## Gerenciamento de senha
