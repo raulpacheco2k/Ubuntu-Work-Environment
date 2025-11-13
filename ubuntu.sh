@@ -70,6 +70,7 @@ sudo apt-get install -y i3
 sudo apt-get install -y xserver-xorg-input-all
 sudo apt-get install -y xinput
 sudo apt-get install -y pulseaudio-utils
+sudo apt-get install -y playerctl
 sudo apt-get install -y alacritty
 sudo apt-get install -y kitty
 sudo apt-get install -y ulauncher
